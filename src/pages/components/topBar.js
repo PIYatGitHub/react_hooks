@@ -11,10 +11,10 @@ const TopBar = () => {
             <NavLink to='/' className='nav-link' exact>Home</NavLink>
             </li>
             <li className='nav-item'>
-            <NavLink to='/login' className='nav-link' exact>Login</NavLink>
+            <NavLink to='/login' className='nav-link'>Login</NavLink>
             </li>
             <li className='nav-item'>
-            <NavLink to='/register' className='nav-link' exact>Register</NavLink>
+            <NavLink to='/register' className='nav-link'>Register</NavLink>
             </li>
         </ul>
      </div> 
