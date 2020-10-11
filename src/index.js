@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Routes from "../src/routes";
+import TopBar from "../src/pages/components/topBar";
 import { BrowserRouter as Router } from "react-router-dom";
 
 const App = () => {
@@ -8,6 +9,7 @@ const App = () => {
     <div>
       <h3>Welcom to hooks</h3>
       <Router>
+        <TopBar/>
         <Routes />
       </Router>
     </div>
