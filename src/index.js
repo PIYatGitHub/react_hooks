@@ -1,17 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import Routes from "../src/routes";
+import { BrowserRouter as Router } from "react-router-dom";
 
+const App = () => {
+  return (
+    <div>
+      <h3>Welcom to hooks</h3>
+      <Router>
+        <Routes />
+      </Router>
+    </div>
+  );
+};
+//006
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
