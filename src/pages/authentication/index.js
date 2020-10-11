@@ -1,18 +1,33 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react'; 
 import { Link } from 'react-router-dom';
 
 const Authentication = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
     
     const handleSubmit = (event)=>{
         event.preventDefault(); 
+        setIsSubmitting(true); 
         console.log('current data is: ', email, password);
     }
 
     useEffect(()=>{
-        console.log('TRIGGER use effect!');
-    }, []);
+        if(!isSubmitting) return; 
+        let url = 'https://conduit.productionready.io/api/users/login'; 
+        axios(url, {
+            method: 'post',
+            data: {user: {email, password}
+            } 
+        }).then(r=> {
+            console.log('result is: ', r);
+            setIsSubmitting(false); 
+        }).catch(e=>{
+            console.log('error is: ', e);
+            setIsSubmitting(false); 
+        })
+    });
 
     return (
     <div className='auth-page'>
@@ -38,7 +53,10 @@ const Authentication = () => {
                                  onChange={e=>setPassword(e.target.value)}
                                   />
                             </fieldset>
-                            <button className='btn btn-lg btn-primary pull-xs-right' type='submit'>
+                            <button className='btn btn-lg btn-primary pull-xs-right'
+                             type='submit'
+                            disabled={isSubmitting}
+                             >
                                 Sign in
                             </button>
                         </fieldset>
