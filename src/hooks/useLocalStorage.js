@@ -7,8 +7,8 @@ export default (key, initialValue='') => {
 
     useEffect(()=>{
         localStorage.setItem(key, value); 
-    }, [value]); 
-    
+    }, [key, value]); 
+
 
 return [value, setValue]; 
 }

@@ -24,13 +24,15 @@ const Authentication = (props) => {
             method: 'post',
             data: {user}
         });
+        if(error) console.log('error is: ', error); 
+        if(token) console.log('token is: ', token); 
     }
 
     useEffect(()=>{
         if(!response) return;
         setToken(response.user.token);
         setIsSuccessfullSubmit(true); 
-    }, [response]); 
+    }, [response, setToken]); 
 
     if(isSuccessfullSubmit) {
         return <Redirect to='/' />
