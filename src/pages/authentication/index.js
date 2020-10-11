@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import { Link } from 'react-router-dom';
 
 const Authentication = () => {
@@ -9,6 +9,10 @@ const Authentication = () => {
         event.preventDefault(); 
         console.log('current data is: ', email, password);
     }
+
+    useEffect(()=>{
+        console.log('TRIGGER use effect!');
+    }, []);
 
     return (
     <div className='auth-page'>
