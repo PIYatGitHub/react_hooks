@@ -15,18 +15,18 @@ const Authentication = () => {
 
     useEffect(()=>{
         if(!isSubmitting) return; 
-        let url = 'https://conduit.productionready.io/api/users/login'; 
-        axios(url, {
-            method: 'post',
-            data: {user: {email, password}
-            } 
-        }).then(r=> {
+        const url = 'https://conduit.productionready.io/api/users/login', 
+        method = 'post',
+        data = {user: {email, password}}; 
+
+        axios(url, {method,data})
+        .then(r=> {
             console.log('result is: ', r);
             setIsSubmitting(false); 
         }).catch(e=>{
             console.log('error is: ', e);
             setIsSubmitting(false); 
-        })
+        });
     });
 
     return (
