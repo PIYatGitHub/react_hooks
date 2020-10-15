@@ -18,7 +18,7 @@ const App = () => {
     </CurrentUserProvider>
   );
 };
-//021 / 041
+//025 / 041
 ReactDOM.render(
   <React.StrictMode>
     <App />
