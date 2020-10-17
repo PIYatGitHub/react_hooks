@@ -1,13 +1,21 @@
-import React, { useEffect } from 'react'; 
+import { stringify } from 'query-string';
+import React, { Fragment, useEffect } from 'react'; 
 import useFetch from '../../hooks/useFetch'; 
+import { getPaginator, limit } from '../../utils';
 import Feed from '../components/feed';
-const GlobalFeed = () => {
-    const apiUrl = '/articles?limit=10&offset=0'; 
+import Pagination from '../components/pagination';
+const GlobalFeed = ({location, match}) => {
+    const {offset, currentPage} = getPaginator(location.search); 
+    const stringifiedParams = stringify({
+        limit, offset
+    })
+    const apiUrl = `/articles?${stringifiedParams}`; 
     const [{response, isLoading, error}, doFetch] = useFetch(apiUrl);
-    
+    const url = match.url; 
+
     useEffect(()=> {
         doFetch(); 
-    }, [doFetch])
+    }, [doFetch, currentPage])
     
     
     return (
@@ -24,8 +32,12 @@ const GlobalFeed = () => {
                 <div className='col-md-9'>
                     {isLoading? <div>Page loading...</div>: null}
                     {error? <div>Unknown error occurred...</div>: null}
-                    {!isLoading && !error && response? 
-                    <Feed articles = {response.articles}/>: 
+                    {!isLoading && !error && response?(
+                        <Fragment>
+                            <Feed articles = {response.articles}/>
+                            <Pagination total={response.articlesCount} limit = {limit} url = {url} currentPage= {currentPage} />                            
+                        </Fragment>
+                    ): 
                     null
                     }
                 </div>
