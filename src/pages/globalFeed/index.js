@@ -35,7 +35,7 @@ const GlobalFeed = ({location, match}) => {
         <div className='container page'>
             <div className='row'>
                 <div className='col-md-9'>
-                    <FeedToggler tagName = 'sampleTag'/>
+                    <FeedToggler/>
                     {isLoading? <Loading/>: null}
                     {error? <ErrorMessage/>: null}
                     {!isLoading && !error && response?(
