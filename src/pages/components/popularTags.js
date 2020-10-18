@@ -19,7 +19,7 @@ const PopularTags = ({articles}) => {
             <p>Popular Tags</p>
             <div className = 'tag-list'>{
                 response.tags.slice(10).map(tag=>(
-                    <Link to={`tags/${tag}`} 
+                    <Link to={`/tags/${tag}`} 
                     className = 'tag-default tag-pill'
                     key  = {tag}>
                     {tag}
