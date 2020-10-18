@@ -4,6 +4,11 @@ import useFetch from '../../hooks/useFetch';
 import { getPaginator, limit } from '../../utils';
 import Feed from '../components/feed';
 import Pagination from '../components/pagination';
+import PopularTags from '../components/popularTags';
+import Loading from '../components/loading';
+import ErrorMessage from '../components/errorMessage';
+import FeedToggler from '../components/feedToggler';
+
 const GlobalFeed = ({location, match}) => {
     const {offset, currentPage} = getPaginator(location.search); 
     const stringifiedParams = stringify({
@@ -30,8 +35,9 @@ const GlobalFeed = ({location, match}) => {
         <div className='container page'>
             <div className='row'>
                 <div className='col-md-9'>
-                    {isLoading? <div>Page loading...</div>: null}
-                    {error? <div>Unknown error occurred...</div>: null}
+                    <FeedToggler tagName = 'sampleTag'/>
+                    {isLoading? <Loading/>: null}
+                    {error? <ErrorMessage/>: null}
                     {!isLoading && !error && response?(
                         <Fragment>
                             <Feed articles = {response.articles}/>
@@ -42,7 +48,7 @@ const GlobalFeed = ({location, match}) => {
                     }
                 </div>
                 <div className='col-md-3'>
-                    Popular tags here!
+                    <PopularTags/>
                 </div>
             </div>
 
