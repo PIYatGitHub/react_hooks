@@ -14,7 +14,6 @@ const EditArticle = ({match}) => {
     const [currentUserState] = useContext(CurrentUserContext); 
 
 const handleSubmit = article => {
-    console.log('in handle submit', article)
         doUpdateArticle({
             method: 'put',
             data: {article}
@@ -26,7 +25,6 @@ const handleSubmit = article => {
     }, [doFetchArticle])
 
     useEffect(()=>{
-        console.log('HERE!!!', fetchArticleResponse)
         if(!fetchArticleResponse) return; 
         setInitialValues({
             title: fetchArticleResponse.article.title,
@@ -42,7 +40,6 @@ const handleSubmit = article => {
 
     }, [updateArticleResponse]);
 
-    console.log(currentUserState); 
     if(currentUserState.isLoggedIn === false) return <Redirect to={'/'} />
     if(isSuccessfullSubmit) return <Redirect to={`/articles/${slug}`} />
     

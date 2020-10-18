@@ -16,7 +16,6 @@ const ArticleForm = ({onSubmit, errors, initialValues}) => {
     }
 
     useEffect(()=> {
-        console.log(initialValues)
         if(!initialValues) return; 
         setTitle(initialValues.title);
         setDescription(initialValues.description);
