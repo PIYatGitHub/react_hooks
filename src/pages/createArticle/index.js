@@ -21,12 +21,12 @@ const CreateArticle = () => {
     };
     const [isSuccessfullSubmit, setIsSuccessfullSubmit] = useState(false); 
     const [currentUserState] = useContext(CurrentUserContext); 
-
+    
     useEffect(()=>{
         if(!response) return; 
         setIsSuccessfullSubmit(true); 
 
-    }, [response, isSuccessfullSubmit]);
+    }, [response]);
 
     if(isSuccessfullSubmit) return <Redirect to={`/articles/${response.article.slug}`} />
     if(!currentUserState.isLoggedIn) return <Redirect to={'/'} />
