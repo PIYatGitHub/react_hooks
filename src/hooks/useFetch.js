@@ -17,6 +17,8 @@ export default (url) => {
     }, []); 
 
     useEffect(()=>{
+        let skipGetResponseAfterDestroy = false;
+
         const opts = {
             ...reqOptions,
             ...{
@@ -33,12 +35,20 @@ export default (url) => {
 
         axios(reqUrl, opts)
         .then(r=> {
-            setResponse(r.data); 
-            setIsLoading(false)
+            if(!skipGetResponseAfterDestroy) {
+                setResponse(r.data); 
+                setIsLoading(false);
+            }
+           
         }).catch(e=>{
+            if(!skipGetResponseAfterDestroy) {
             setError(e.response.data);
-            setIsLoading(false)
+            setIsLoading(false);
+        }
         });
+        return ()=> { //unsubsribe function
+            skipGetResponseAfterDestroy = true; 
+        }
     }, [isLoading, reqOptions, url, token]);
 return [{response, error, isLoading}, doFetch]
 }
